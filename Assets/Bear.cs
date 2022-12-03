@@ -6,16 +6,18 @@ using UnityEngine.AI;
 public class Bear : Animal
 {
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-
+        //calls animal start
+        base.Start();
+        
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-
-        
+        //calls base update
+        base.Update();
     }
 }
