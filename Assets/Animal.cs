@@ -14,28 +14,40 @@ public class Animal : MonoBehaviour{
     private float FleeDistance;
 
 
-//navmesh testing
+    //navmesh testing
     public NavMeshAgent agent;
     [Range(0,100)] public float speed;
     [Range(0,500)] public float walkRadius;
+
+    //animator
+    private Animator animation_controller;
 
 
 
     // Start is called before the first frame update
     void Start(){
-        agent = GetComponent<NavMeshAgent>();
 
+        agent = GetComponent<NavMeshAgent>();
         if(agent != null){
             agent.speed = speed;
             agent.SetDestination(RandomNavMeshLocation());
         }
+
+        animation_controller = GetComponent<Animator>();
+        animation_controller.SetBool("isWalking",true);
         
     }
 
     public Vector3 RandomNavMeshLocation(){
         Vector3 finalPosition = Vector3.zero;
+        //gets a random point in 3d space within a sphere the size of our WalkRadius
         Vector3 randomPosition = Random.insideUnitSphere*walkRadius;
+        //makes it so this sphere is centered around agent
         randomPosition += transform.position;
+
+        // if our chosen position is found on the navMesh
+        //position is found by projecting input point onto navMesh along vertical axis.
+        //hit is point on navMesh we projected to.
         if(NavMesh.SamplePosition(randomPosition,out NavMeshHit hit, walkRadius,1)){
             finalPosition = hit.position;
         }
@@ -48,6 +60,11 @@ public class Animal : MonoBehaviour{
         //Scavenge()
         if(agent != null && agent.remainingDistance <= agent.stoppingDistance){
             agent.SetDestination(RandomNavMeshLocation());
+            animation_controller.SetBool("isWalking",true);
+        }
+        else{
+            //animation_controller.SetBool("isWalking",false);
+
         }
     }
 
