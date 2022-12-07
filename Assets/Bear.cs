@@ -10,6 +10,7 @@ public class Bear : Animal
     {
         //calls animal start
         base.Start();
+        FoodPreference = "BearFood";
         
 
     }

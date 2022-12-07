@@ -10,6 +10,7 @@ public class Deer : Animal
     {
         //calls animal start
         base.Start();
+        FoodPreference = "DeerFood";
         
 
     }
