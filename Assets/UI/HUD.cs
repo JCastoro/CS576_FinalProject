@@ -37,10 +37,14 @@ public class HUD : MonoBehaviour
     void Update()
     {
         //list of animals needed to find, when one is removed we change HUD behavior.
-        
+        updateTime(timeRemainingText,ref timeRemaining);
     }
 
-    public void updateTime(Text timeRemainingText, float timeRemaining){
+    public void updateTime(Text timeRemainingText, ref float timeRemaining){
+        timeRemaining-=Time.deltaTime;
+        float minutes = Mathf.FloorToInt(timeRemaining / 60);
+        float seconds = Mathf.FloorToInt(timeRemaining % 60);
+        timeRemainingText.text = "Time Remaining: "+ minutes.ToString()+":"+seconds.ToString();
 
 
     }
