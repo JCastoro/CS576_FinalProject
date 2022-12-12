@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+
+    //scroller
+    public RawImage Image;
+    public float x;
+    public float scrollSpeed;
 
     public AudioMixer audioMixer;
 
@@ -42,6 +48,8 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Image.uvRect = new Rect(Image.uvRect.position + new Vector2(x,0) * (Time.deltaTime* 1/scrollSpeed),Image.uvRect.size); 
+
         
     }
 }
