@@ -18,6 +18,14 @@ public class Menu : MonoBehaviour
     public void PlayGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
+
+    public void PlayGameAgain(){
+        SceneManager.LoadScene("Forest");
+    }
+    public void quitToMenu(){
+        SceneManager.LoadScene("MainMenu");
+
+    }
     public void QuitGame(){
         Debug.Log("Application Quit");
         Application.Quit();

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public bool isCrouching;
+    public bool isTakingPicture;
     public float walking_velocity;
     public Vector3 movement_direction;
     public Transform orientation;

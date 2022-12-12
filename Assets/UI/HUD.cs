@@ -13,6 +13,7 @@ public class HUD : MonoBehaviour
 
     //hud aspects
     public Text timeRemainingText;
+    public GameObject cameraMask;
     public float timeRemaining;
     // Start is called before the first frame update
 
@@ -37,10 +38,21 @@ public class HUD : MonoBehaviour
     void Update()
     {
         //list of animals needed to find, when one is removed we change HUD behavior.
-        
+        updateTime(timeRemainingText,ref timeRemaining);
+
+        if(player.isTakingPicture){
+            cameraMask.SetActive(true);
+            Debug.Log("cam");
+        }
+        else
+            cameraMask.SetActive(false);
     }
 
-    public void updateTime(Text timeRemainingText, float timeRemaining){
+    public void updateTime(Text timeRemainingText, ref float timeRemaining){
+        timeRemaining-=Time.deltaTime;
+        float minutes = Mathf.FloorToInt(timeRemaining / 60);
+        float seconds = Mathf.FloorToInt(timeRemaining % 60);
+        timeRemainingText.text = "Time Remaining: "+ minutes.ToString()+":"+seconds.ToString();
 
 
     }
