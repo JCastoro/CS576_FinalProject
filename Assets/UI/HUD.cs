@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
 
     private Player player;
     public GameObject playerHolder;
+    public GameObject objectiveHolder;
     public Canvas hud;
 
 
@@ -15,13 +16,18 @@ public class HUD : MonoBehaviour
     public Text timeRemainingText;
     public GameObject cameraMask;
     public float timeRemaining;
-    // Start is called before the first frame update
+
+        //objectives
+    public int currAnimalIndex;
+    private GameObject objectiveName;
+    private GameObject objectiveImage;
 
     public List<string> animalsToFind=new List<string>(){
         "Deer",
         "Boar",
         "Bear"
         };
+    public Sprite[] spriteArray;
 
     void Start()
     {
@@ -31,7 +37,13 @@ public class HUD : MonoBehaviour
         Debug.Log(hud);
         timeRemaining = 180f;//3 min initial timer
         timeRemainingText.text = "Time Remaining: "+ timeRemaining.ToString();
-        
+
+        //setting up objectives
+        currAnimalIndex=0;
+        objectiveName = objectiveHolder.transform.GetChild(2).gameObject;
+        objectiveName.GetComponent<Text>().text=animalsToFind[currAnimalIndex];
+        objectiveImage = objectiveHolder.transform.GetChild(0).gameObject;
+        objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex];   
     }
 
     // Update is called once per frame
@@ -39,6 +51,9 @@ public class HUD : MonoBehaviour
     {
         //list of animals needed to find, when one is removed we change HUD behavior.
         updateTime(timeRemainingText,ref timeRemaining);
+
+        //changes animal objective
+        updateAnimalObjective(currAnimalIndex);
 
         if(player.isTakingPicture){
             cameraMask.SetActive(true);
@@ -54,6 +69,12 @@ public class HUD : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeRemaining % 60);
         timeRemainingText.text = "Time Remaining: "+ minutes.ToString()+":"+seconds.ToString();
 
+
+    }
+
+    public void updateAnimalObjective(int currAnimalIndex){
+        objectiveName.GetComponent<Text>().text=animalsToFind[currAnimalIndex];
+        objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
 
     }
 }

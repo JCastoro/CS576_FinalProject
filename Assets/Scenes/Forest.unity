@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 331974890}
   - component: {fileID: 331974889}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: CurrentObjectiveTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 334445138}
   - component: {fileID: 334445137}
   m_Layer: 0
-  m_Name: Image
+  m_Name: ObjectiveImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2679,6 +2679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHolder: {fileID: 2103683942}
+  objectiveHolder: {fileID: 1093464254}
   hud: {fileID: 0}
   timeRemainingText: {fileID: 1157216155}
   cameraMask: {fileID: 1179238380}
@@ -2687,6 +2688,10 @@ MonoBehaviour:
   - Deer
   - Boar
   - Bear
+  spriteArray:
+  - {fileID: 21300000, guid: 7eba6bf0b55dd124f91f1a166853d4f1, type: 3}
+  - {fileID: 21300000, guid: 98dfe25c90cc64c4f905963bfb27bbe8, type: 3}
+  - {fileID: 21300000, guid: 57bc7d3b96f5ad94abac9806be45a933, type: 3}
 --- !u!1 &1857449194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,7 +2704,7 @@ GameObject:
   - component: {fileID: 1857449197}
   - component: {fileID: 1857449196}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: ObjectiveName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
