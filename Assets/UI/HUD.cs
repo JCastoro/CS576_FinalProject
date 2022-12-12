@@ -13,6 +13,7 @@ public class HUD : MonoBehaviour
 
     //hud aspects
     public Text timeRemainingText;
+    public GameObject cameraMask;
     public float timeRemaining;
     // Start is called before the first frame update
 
@@ -38,6 +39,13 @@ public class HUD : MonoBehaviour
     {
         //list of animals needed to find, when one is removed we change HUD behavior.
         updateTime(timeRemainingText,ref timeRemaining);
+
+        if(player.isTakingPicture){
+            cameraMask.SetActive(true);
+            Debug.Log("cam");
+        }
+        else
+            cameraMask.SetActive(false);
     }
 
     public void updateTime(Text timeRemainingText, ref float timeRemaining){

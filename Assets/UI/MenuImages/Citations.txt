@@ -1,1 +1,5 @@
-https://www.vecteezy.com/vector-art/6033143-illustration-of-a-summer-forest-landscape-in-cartoon-style
+PossibleMenu:
+	https://www.vecteezy.com/vector-art/6033143-illustration-of-a-summer-forest-landscape-in-cartoon-style
+
+camera crosshair:
+	https://www.google.com/url?sa=i&url=https%3A%2F%2Fflyclipart.com%2Fcamera-croshair-guideline-photo-viewfinder-icon-camera-viewfinder-png-595292&psig=AOvVaw3oEHZMgGxuKteUwWDLj6qd&ust=1670947368009000&source=images&cd=vfe&ved=0CBAQjhxqFwoTCJiusJu69PsCFQAAAAAdAAAAABAI
