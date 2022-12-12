@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     float velocity;
     float horizontalInput;
     float verticalInput;
+
+
     // Start is called before the first frame update
     void Start()
     {
