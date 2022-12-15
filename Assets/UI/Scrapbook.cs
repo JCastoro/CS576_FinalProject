@@ -7,19 +7,8 @@ using UnityEngine.UI;
 public class Scrapbook : MonoBehaviour
 {
     public GameObject AnimalPanels;
-
-    private GameObject DeerPanel;
-    private GameObject BoarPanel; 
-    private GameObject BearPanel;
     // Start is called before the first frame update
     void Start(){
-        GameObject DeerPanel = AnimalPanels.transform.GetChild(0).gameObject;
-        GameObject BoarPanel = AnimalPanels.transform.GetChild(1).gameObject;
-        GameObject BearPanel = AnimalPanels.transform.GetChild(2).gameObject;
-
-        Debug.Log("Missing: "+ DeerPanel.GetComponentInChildren<Text>().text);
-        
-
         //testing to make sure they all work
         UpdateAnimalPanel(0);
         UpdateAnimalPanel(1);
