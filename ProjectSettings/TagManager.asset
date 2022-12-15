@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BearFood
   - DeerFood
+  - Scrapbook
   layers:
   - Default
   - TransparentFX
