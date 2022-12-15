@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         TimeRemainingPanel = HUD.transform.Find("TimeRemaining").gameObject;
         TimeRemainingText = HUD.transform.Find("TimeRemaining").Find("TimeRemainingText").gameObject.GetComponent<Text>();
             //objectives
+        currAnimalIndex=0;
+        
         CurrentObjectivePanel = HUD.transform.Find("CurrentObjective").gameObject;
         objectiveName = CurrentObjectivePanel.transform.GetChild(2).gameObject;
         objectiveImage = CurrentObjectivePanel.transform.GetChild(0).gameObject;
@@ -55,13 +57,14 @@ public class GameManager : MonoBehaviour
         TimeRemaining = TimePerObjective;//3 min initial timer
         TimeRemainingText.text = "Time Remaining: "+ TimeRemaining.ToString();
 
-        currAnimalIndex=0;
+        
         
     }
 
     // Update is called once per frame
     void Update(){
         DisplayScrapbook();
+        updateAnimalObjective(currAnimalIndex);
 
         if(Player.isTakingPicture){
             CameraMask.SetActive(true);
@@ -87,11 +90,7 @@ public class GameManager : MonoBehaviour
     void updateAnimalObjective(int currAnimalIndex){
         
         objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
-        
         objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
-
-        objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
-        objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex];
         
         //ScrapbookController.MarkAnimalFound(currAnimalIndex); 
     }
