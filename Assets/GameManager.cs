@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -85,12 +86,16 @@ public class GameManager : MonoBehaviour
 
 //moves us to the next objective
     void NextAnimalObjective(ref int currAnimalIndex){
-        currAnimalIndex+=1;
-        
-        objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
-        objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
-        ScrapbookOverlay.GetComponent<Scrapbook>().MarkAnimalFound(currAnimalIndex-1);
-        //ScrapbookController.MarkAnimalFound(currAnimalIndex); 
+        if(currAnimalIndex<AnimalsToFind.Count){
+            currAnimalIndex+=1;
+            objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
+            objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
+            ScrapbookOverlay.GetComponent<Scrapbook>().MarkAnimalFound(currAnimalIndex-1);
+        }
+        else{
+            Debug.Log("Called next animal object when list was complete.");
+        }
+       
     }
     void SetHUDbyAnimalIndex(int currAnimalIndex){
         objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
             timeRemainingText.text = "Time Remaining: "+ minutes.ToString()+":"+seconds.ToString();
         }
         else{
+            SceneManager.LoadScene("GameOver");
             //change scenes to game over.
         }
 
