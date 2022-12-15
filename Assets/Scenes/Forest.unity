@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Iron_age_pig_prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 1828100575842878, guid: 7ecfe0282102b144b8d4cdbe3a3dc2f5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4076617219373442, guid: 7ecfe0282102b144b8d4cdbe3a3dc2f5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2017,7 +2021,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b56e18ba123fd3549b5dc2797b57f078, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 12.8, y: 11.13}
@@ -3472,7 +3476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1469321126311600, guid: 6a9bdc72a5293d54bab5c93cc95855b2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4002098813547450, guid: 6a9bdc72a5293d54bab5c93cc95855b2, type: 3}
       propertyPath: m_RootOrder
@@ -3781,6 +3785,7 @@ MonoBehaviour:
   ScavengeAreaMinY: 191
   ScavengeAreaMaxX: 287
   ScavengeAreaMaxY: 291
+  bearprint: {fileID: 21300000, guid: b56e18ba123fd3549b5dc2797b57f078, type: 3}
 --- !u!135 &1547238476
 SphereCollider:
   m_ObjectHideFlags: 0

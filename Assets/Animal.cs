@@ -26,6 +26,8 @@ public class Animal : MonoBehaviour{
     [Range(10,300)] public float ScavengeAreaMinY;
     [Range(10,300)] public float ScavengeAreaMaxX;
     [Range(10,300)] public float ScavengeAreaMaxY;
+    private float distanceSinceLastFootprint;
+    private Vector3 lastLocation;
 
     private bool IsWalkingToFood = false;
     private GameObject CurrFood = null;
@@ -35,6 +37,7 @@ public class Animal : MonoBehaviour{
 
     // Animator Notes (check AnimatorState)
     protected Animator AnimationController;
+    protected Sprite footprint;
 
     protected virtual void Start(){
         Agent = GetComponent<NavMeshAgent>();
@@ -44,11 +47,17 @@ public class Animal : MonoBehaviour{
 
         AnimationController = GetComponent<Animator>();
         DetectionSphere = GetComponent<SphereCollider>();
+        
+        distanceSinceLastFootprint=0;
+        lastLocation = new Vector3(0f,0f,0f);
     }
 
     protected virtual void Update(){
         if(Time.time < 1f)
             return;
+        leaveFootprints(footprint);
+
+
 
         if(Agent.remainingDistance <= Agent.stoppingDistance){//if at our currentDestination
             //flag to see if we have first arrived somewhere
@@ -107,6 +116,29 @@ public class Animal : MonoBehaviour{
         AnimationController.SetInteger("AnimationState", (int) AnimatorState.Eating);
         yield return new WaitForSeconds(2f);
         Destroy(food);
+    }
+    public void leaveFootprints(Sprite footprintSprite){
+        distanceSinceLastFootprint += (lastLocation - Agent.transform.position).magnitude;    
+        lastLocation = Agent.transform.position;
+
+        if(distanceSinceLastFootprint > 5f){//if agent has moved as crow flies 5f
+            
+            //initiallizing footprint at animals current location
+            GameObject footprint = new GameObject();
+            footprint.transform.position = Agent.transform.position;
+            //sizing footprint
+            footprint.transform.localScale=new Vector3(0.2f,0.2f,0.2f);
+            //orients footprint in same direction animal is walking
+            footprint.transform.forward = Agent.transform.forward;
+            footprint.transform.Rotate(90.0f, 0.0f, 0.0f, Space.Self);
+    
+            //adds that animals sprite to the game object
+            footprint.AddComponent<SpriteRenderer>();
+            footprint.GetComponent<SpriteRenderer>().sprite=footprintSprite;
+            Debug.Log("footprint placed");
+            
+            distanceSinceLastFootprint = 0f;
+        }
     }
 
 
