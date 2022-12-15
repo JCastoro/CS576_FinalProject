@@ -135,7 +135,7 @@ public class Animal : MonoBehaviour{
             //adds that animals sprite to the game object
             footprint.AddComponent<SpriteRenderer>();
             footprint.GetComponent<SpriteRenderer>().sprite=footprintSprite;
-            Debug.Log("footprint placed");
+            //Debug.Log("footprint placed");
             
             distanceSinceLastFootprint = 0f;
         }

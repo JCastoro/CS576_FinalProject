@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1828100575842878, guid: 7ecfe0282102b144b8d4cdbe3a3dc2f5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4076617219373442, guid: 7ecfe0282102b144b8d4cdbe3a3dc2f5, type: 3}
       propertyPath: m_RootOrder
@@ -232,6 +232,7 @@ MonoBehaviour:
   ScavengeAreaMinY: 90
   ScavengeAreaMaxX: 202
   ScavengeAreaMaxY: 203
+  deerprint: {fileID: 0}
 --- !u!1 &109804897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1927,7 @@ MonoBehaviour:
   ScavengeAreaMinY: 23
   ScavengeAreaMaxX: 255
   ScavengeAreaMaxY: 260
+  boarprint: {fileID: 21300000, guid: c3d37a15443a35c42aab591a4a8b2bd2, type: 3}
 --- !u!135 &845554351
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3476,7 +3478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1469321126311600, guid: 6a9bdc72a5293d54bab5c93cc95855b2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4002098813547450, guid: 6a9bdc72a5293d54bab5c93cc95855b2, type: 3}
       propertyPath: m_RootOrder
@@ -3568,6 +3570,7 @@ MonoBehaviour:
   ScavengeAreaMinY: 25
   ScavengeAreaMaxX: 102
   ScavengeAreaMaxY: 102
+  deerprint: {fileID: 21300000, guid: 24c98ceb97865ea47b1f25bf54c7289b, type: 3}
 --- !u!135 &1513081565
 SphereCollider:
   m_ObjectHideFlags: 0
