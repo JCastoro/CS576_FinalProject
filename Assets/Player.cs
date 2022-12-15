@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     public bool isCrouching;
+    public bool isPressingTab;
     public bool isTakingPicture;
     public float walking_velocity;
     public Vector3 movement_direction;
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
     void Update(){
         //bools so we can use for animation stuff
         MovePlayer();
-        DisplayScrapbook();
+        isPressingTab = Input.GetKey("tab");
 
     }
 
@@ -53,17 +54,15 @@ public class Player : MonoBehaviour
             cameraPos.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
         characterController.Move(movement_direction.normalized * velocity * Time.deltaTime);
+
+        //isPressing tab
+        bool tab_pressed = Input.GetKey("tab");
+        if (tab_pressed){
+            
+        
+        }   
      
     }
 
-    void DisplayScrapbook(){
-        bool tab_pressed = Input.GetKey("tab");
-        if (tab_pressed){    
-            Debug.Log(Scrapbook);
-            Scrapbook.SetActive(true);
-        }
-        else{
-            Scrapbook.SetActive(false);
-        }
-    }
+    
 }

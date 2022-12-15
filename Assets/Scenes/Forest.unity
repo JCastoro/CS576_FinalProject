@@ -3295,8 +3295,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505536885}
+  - component: {fileID: 1505536886}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3318,6 +3319,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505536886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505536884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd8b83899cbc8d4192d7743c254788b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrapbookOverlay: {fileID: 625622534}
+  ScrapbookController: {fileID: 625622540}
+  Player: {fileID: 2103683943}
+  currAnimalIndex: 0
+  HUD: {fileID: 1719393412}
+  AnimalsToFind:
+  - Deer
+  - Boar
+  - Bear
+  spriteArray:
+  - {fileID: 21300000, guid: 7eba6bf0b55dd124f91f1a166853d4f1, type: 3}
+  - {fileID: 21300000, guid: 98dfe25c90cc64c4f905963bfb27bbe8, type: 3}
+  - {fileID: 21300000, guid: 57bc7d3b96f5ad94abac9806be45a933, type: 3}
+  TimeRemaining: 180
 --- !u!1001 &1513081556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3741,7 +3768,6 @@ GameObject:
   - component: {fileID: 1719393412}
   - component: {fileID: 1719393411}
   - component: {fileID: 1719393410}
-  - component: {fileID: 1719393413}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -3833,33 +3859,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1719393413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1719393408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: badb2569a59a31543a52e58a3b84e12c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHolder: {fileID: 2103683942}
-  objectiveHolder: {fileID: 1093464254}
-  hud: {fileID: 0}
-  timeRemainingText: {fileID: 1157216155}
-  cameraMask: {fileID: 1179238380}
-  timeRemaining: 0
-  currAnimalIndex: 0
-  animalsToFind:
-  - Deer
-  - Boar
-  - Bear
-  spriteArray:
-  - {fileID: 21300000, guid: 7eba6bf0b55dd124f91f1a166853d4f1, type: 3}
-  - {fileID: 21300000, guid: 98dfe25c90cc64c4f905963bfb27bbe8, type: 3}
-  - {fileID: 21300000, guid: 57bc7d3b96f5ad94abac9806be45a933, type: 3}
 --- !u!1 &1743236572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,6 +4465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrouching: 0
+  isPressingTab: 0
   isTakingPicture: 0
   walking_velocity: 5
   movement_direction: {x: 0, y: 0, z: 0}
