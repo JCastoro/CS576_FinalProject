@@ -75,6 +75,7 @@ public class HUD : MonoBehaviour
     public void updateAnimalObjective(int currAnimalIndex){
         objectiveName.GetComponent<Text>().text=animalsToFind[currAnimalIndex];
         objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
-
     }
+
+
 }

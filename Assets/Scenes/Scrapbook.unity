@@ -284,6 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216237634}
+  - component: {fileID: 216237635}
   m_Layer: 5
   m_Name: AnimalPanels
   m_TagString: Untagged
@@ -314,6 +315,19 @@ RectTransform:
   m_AnchoredPosition: {x: 110.5, y: 24}
   m_SizeDelta: {x: -1115, y: -594}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &216237635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216237633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7d9f0b4bd6bd645ac60b11476da184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalPanels: {fileID: 216237633}
 --- !u!1 &240218341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1237,7 @@ GameObject:
   - component: {fileID: 1533635653}
   - component: {fileID: 1533635652}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ObjectiveLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1652,7 +1666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
