@@ -4471,6 +4471,7 @@ MonoBehaviour:
   movement_direction: {x: 0, y: 0, z: 0}
   orientation: {fileID: 118263363}
   characterController: {fileID: 2103683948}
+  Scrapbook: {fileID: 625622534}
 --- !u!136 &2103683944
 CapsuleCollider:
   m_ObjectHideFlags: 0

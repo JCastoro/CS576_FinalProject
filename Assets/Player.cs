@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     float velocity;
     float horizontalInput;
     float verticalInput;
-    private GameObject Scrapbook;
+
+//I think in order to keep reference to this i have to declare it from Unity
+    public GameObject Scrapbook;
 
 
     // Start is called before the first frame update
@@ -23,14 +25,11 @@ public class Player : MonoBehaviour
         cameraPos = GameObject.Find("/Player/CameraPos");
         isCrouching = false;
         movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
-        GameObject Scrapbook = GameObject.FindWithTag("Scrapbook");
         Scrapbook.SetActive(false);
-        Debug.Log(Scrapbook);
     }
 
     // Update is called once per frame
     void Update(){
-
         //bools so we can use for animation stuff
         MovePlayer();
         DisplayScrapbook();
@@ -61,11 +60,10 @@ public class Player : MonoBehaviour
         bool tab_pressed = Input.GetKey("tab");
         if (tab_pressed){    
             Debug.Log(Scrapbook);
-            //Scrapbook.SetActive(true);
+            Scrapbook.SetActive(true);
         }
         else{
-            //Scrapbook.SetActive(false);
+            Scrapbook.SetActive(false);
         }
-
     }
 }
