@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject ScrapbookOverlay;
-    public Scrapbook ScrapbookController;
     public Player Player;
     private static float TimePerObjective=180f;
     public int currAnimalIndex;
@@ -44,10 +43,11 @@ public class GameManager : MonoBehaviour
         TimeRemainingText = HUD.transform.Find("TimeRemaining").Find("TimeRemainingText").gameObject.GetComponent<Text>();
             //objectives
         currAnimalIndex=0;
-        
+
         CurrentObjectivePanel = HUD.transform.Find("CurrentObjective").gameObject;
         objectiveName = CurrentObjectivePanel.transform.GetChild(2).gameObject;
         objectiveImage = CurrentObjectivePanel.transform.GetChild(0).gameObject;
+        SetHUDbyAnimalIndex(currAnimalIndex);
             //camera mask
         CameraMask = HUD.transform.Find("CamMask").gameObject;
 
@@ -56,15 +56,13 @@ public class GameManager : MonoBehaviour
         //timer
         TimeRemaining = TimePerObjective;//3 min initial timer
         TimeRemainingText.text = "Time Remaining: "+ TimeRemaining.ToString();
-
-        
-        
     }
 
     // Update is called once per frame
     void Update(){
-        DisplayScrapbook();
-        updateAnimalObjective(currAnimalIndex);
+        CheckifDisplayScrapbook();
+        //to be called when player captures the animal picture.
+        //NextAnimalObjective(ref currAnimalIndex);
 
         if(Player.isTakingPicture){
             CameraMask.SetActive(true);
@@ -72,11 +70,9 @@ public class GameManager : MonoBehaviour
         }
         else
             CameraMask.SetActive(false);
-    
-
     }
 
-    void DisplayScrapbook(){
+    void CheckifDisplayScrapbook(){
          
         Debug.Log(ScrapbookOverlay);
         if(Player.isPressingTab){
@@ -87,12 +83,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void updateAnimalObjective(int currAnimalIndex){
+//moves us to the next objective
+    void NextAnimalObjective(ref int currAnimalIndex){
+        currAnimalIndex+=1;
         
         objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
         objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
-        
+        ScrapbookOverlay.GetComponent<Scrapbook>().MarkAnimalFound(currAnimalIndex-1);
         //ScrapbookController.MarkAnimalFound(currAnimalIndex); 
+    }
+    void SetHUDbyAnimalIndex(int currAnimalIndex){
+        objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
+        objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
     }
 
     public void updateTime(Text timeRemainingText, ref float timeRemaining){

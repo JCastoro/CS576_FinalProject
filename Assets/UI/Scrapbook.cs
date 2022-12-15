@@ -9,10 +9,7 @@ public class Scrapbook : MonoBehaviour
     public GameObject AnimalPanels;
     // Start is called before the first frame update
     void Start(){
-        //testing to make sure they all work
-        UpdateAnimalPanel(0);
-        UpdateAnimalPanel(1);
-        //UpdateAnimalPanel(2);
+
     }
 
     // Update is called once per frame
@@ -20,7 +17,7 @@ public class Scrapbook : MonoBehaviour
         
     }
 
-    public void UpdateAnimalPanel(int AnimalIndex){
+    public void MarkAnimalFound(int AnimalIndex){
             GameObject AnimalPanel = AnimalPanels.transform.GetChild(AnimalIndex).gameObject;
             Image Image = AnimalPanel.transform.Find("ProfilePic").GetComponent<Image>();
             AnimalPanel.GetComponentInChildren<Text>().text = "FOUND";
