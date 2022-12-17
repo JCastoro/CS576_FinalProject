@@ -8,61 +8,59 @@ public class Player : MonoBehaviour
     public bool isCrouching;
     public bool isPressingTab;
     public bool isTakingPicture;
-    public float walking_velocity;
-    public Vector3 movement_direction;
-    public Transform orientation;
     public CharacterController characterController;
-    GameObject cameraPos;
-    float velocity;
-    float horizontalInput;
-    float verticalInput;
+    public Transform CameraTransform;
 
-//I think in order to keep reference to this i have to declare it from Unity
+    private float walkingVelocity = 5;
+    float velocity;
+
+    private float sensitivity = 400;
+    private float xRotation, yRotation;
+
+    // I think in order to keep reference to this i have to declare it from Unity
     public GameObject Scrapbook;
 
 
-    // Start is called before the first frame update
     void Start(){
-        cameraPos = GameObject.Find("/Player/CameraPos");
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         isCrouching = false;
-        movement_direction = new Vector3(0.0f, 0.0f, 0.0f);
         Scrapbook.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update(){
-        //bools so we can use for animation stuff
-        MovePlayer();
         isPressingTab = Input.GetKey("tab");
+        isCrouching = Input.GetKey("left ctrl");
+        //tab_pressed = Input.GetKey("tab");
+        MoveCamera();
+        MovePlayer();
 
+    }
+
+    void MoveCamera(){
+        // Camera Position
+        if (isCrouching){
+            CameraTransform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        } else {
+            CameraTransform.position = new Vector3(transform.position.x, 1, transform.position.z);
+        }
+
+        // Camera Rotation
+        yRotation += Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivity;
+        xRotation -= Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivity;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        CameraTransform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
 
     void MovePlayer(){
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-        movement_direction = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        float HorizontalInput = Input.GetAxisRaw("Horizontal");
+        float VerticalInput = Input.GetAxisRaw("Vertical");
+        transform.rotation = Quaternion.Euler(0, yRotation, 0);
 
-        bool ctrl_pressed = Input.GetKey("left ctrl");
-        if (ctrl_pressed){
-            isCrouching = true;
-            velocity = walking_velocity / 2;
-            cameraPos.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
-        }
-        else{
-            isCrouching = false;
-            velocity = walking_velocity;
-            cameraPos.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
-        }
-        characterController.Move(movement_direction.normalized * velocity * Time.deltaTime);
-
-        //isPressing tab
-        bool tab_pressed = Input.GetKey("tab");
-        if (tab_pressed){
-            
-        
-        }   
-     
+        Vector3 motion = transform.forward * VerticalInput + transform.right * HorizontalInput;
+        velocity = isCrouching ? walkingVelocity/2 : walkingVelocity;
+        characterController.Move(motion.normalized * velocity * Time.deltaTime);
     }
-
-    
 }
