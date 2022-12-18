@@ -11,6 +11,7 @@ public class Boar : Animal
     {
         //calls animal start
         base.Start();
+        FoodPreference = "BoarFood";
         footprint = boarprint;
     
     }

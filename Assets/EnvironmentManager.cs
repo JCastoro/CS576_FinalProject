@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour{
     public GameObject BearFood;
+    public GameObject BoarFood;
+    public GameObject DeerFood;
     
     // TODO Add tree
     void Start(){
-       GenerateGameObject(BearFood, 10, 0, 300, 0, 300); 
+       GenerateGameObject(BearFood, 10, 140, 145, 110, 115); 
     }
 
     void GenerateGameObject(GameObject gameObject, int numObjects, float minX, float maxX, float minZ, float maxZ){

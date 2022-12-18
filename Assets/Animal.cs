@@ -41,7 +41,7 @@ public class Animal : MonoBehaviour{
 
     protected virtual void Start(){
         Agent = GetComponent<NavMeshAgent>();
-        //Agent.stoppingDistance = 1.5f;
+        Agent.stoppingDistance = 1f;
         Agent.speed = speed;
         Agent.SetDestination(RandomNavMeshLocationGRID());
 

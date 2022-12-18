@@ -7,6 +7,8 @@ TagManager:
   - BearFood
   - DeerFood
   - Scrapbook
+  - Terrain
+  - BoarFood
   layers:
   - Default
   - TransparentFX
