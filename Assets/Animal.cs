@@ -128,7 +128,7 @@ public class Animal : MonoBehaviour{
             
             //initiallizing footprint at animals current location
             GameObject footprint = new GameObject();
-            footprint.transform.position = Agent.transform.position;
+            footprint.transform.position = Agent.transform.position +new Vector3(0,0.02f,0);//slightly raised so you can see
             //sizing footprint
             footprint.transform.localScale=new Vector3(0.2f,0.2f,0.2f);
             //orients footprint in same direction animal is walking
@@ -139,9 +139,26 @@ public class Animal : MonoBehaviour{
             footprint.AddComponent<SpriteRenderer>();
             footprint.GetComponent<SpriteRenderer>().sprite=footprintSprite;
             //Debug.Log("footprint placed");
-            
+            StartCoroutine("DestroyFootprint",footprint);
             distanceSinceLastFootprint = 0f;
         }
+    }
+
+    IEnumerator DestroyFootprint( GameObject footprint){
+        yield return new WaitForSeconds(15f);
+        Debug.Log("delay over");
+        Color startAlpha = footprint.GetComponent<SpriteRenderer>().color;
+        Color endAlpha = footprint.GetComponent<SpriteRenderer>().color;
+        endAlpha.a=0f;
+        //fade out code from:
+        //https://forum.unity.com/threads/how-do-i-fade-a-object-in-out-over-time.361492/
+        for (float t=0f;t<5f;t+=Time.deltaTime) {
+            float normalizedTime = t/5f;
+            footprint.GetComponent<SpriteRenderer>().color = Color.Lerp(startAlpha, endAlpha, normalizedTime);
+            yield return null;
+            }
+        footprint.GetComponent<SpriteRenderer>().color = endAlpha; //without this, the value will end at something like 0.9992367  
+        Destroy(footprint);
     }
 
 
