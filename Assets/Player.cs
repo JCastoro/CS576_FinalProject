@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     void Update(){
         isPressingTab = Input.GetKey("tab");
         isCrouching = Input.GetKey("left ctrl");
+        isTakingPicture= Input.GetKey("mouse 1");
         //tab_pressed = Input.GetKey("tab");
         MoveCamera();
         MovePlayer();
