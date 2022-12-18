@@ -41,7 +41,7 @@ public class Animal : MonoBehaviour{
 
     protected virtual void Start(){
         Agent = GetComponent<NavMeshAgent>();
-        Agent.stoppingDistance = 0f;
+        //Agent.stoppingDistance = 1.5f;
         Agent.speed = speed;
         Agent.SetDestination(RandomNavMeshLocationGRID());
 
@@ -56,10 +56,12 @@ public class Animal : MonoBehaviour{
         if(Time.time < 1f)
             return;
         leaveFootprints(footprint);
+        Debug.Log("remaing distance: " + Agent.remainingDistance);
 
 
 
         if(Agent.remainingDistance <= Agent.stoppingDistance){//if at our currentDestination
+            Debug.Log("At destination");
             //flag to see if we have first arrived somewhere
             if (ArrivalTime == -1f){
                 ArrivalTime = Time.time;
@@ -95,6 +97,7 @@ public class Animal : MonoBehaviour{
     private void OnTriggerEnter(Collider other){
         if(other.gameObject.tag == FoodPreference){
             // Checks for food preference
+            Debug.Log(other.gameObject.transform.position);
             Agent.SetDestination(other.gameObject.transform.position);
             IsWalkingToFood=true;
             CurrFood = other.gameObject;
