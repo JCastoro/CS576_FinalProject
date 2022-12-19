@@ -56,16 +56,11 @@ public class Animal : MonoBehaviour{
         if(Time.time < 1f)
             return;
         leaveFootprints(footprint);
-        Debug.Log("remaing distance: " + Agent.remainingDistance);
-
-
 
         if(Agent.remainingDistance <= Agent.stoppingDistance){//if at our currentDestination
-            Debug.Log("At destination");
             //flag to see if we have first arrived somewhere
             if (ArrivalTime == -1f){
                 ArrivalTime = Time.time;
-                Debug.Log("Arrival Time: " + (ArrivalTime));
             } else if(Time.time - ArrivalTime > 5f){
                 //if waiting time is over, set new destination
                 Agent.SetDestination(RandomNavMeshLocationGRID());
@@ -74,11 +69,10 @@ public class Animal : MonoBehaviour{
             } else{
                 //do while waiting
                 if(IsWalkingToFood && CurrFood!=null){// if we are walking to food
-                    Debug.Log("eating food");
                     StartCoroutine("Eating", CurrFood);
                 }
             }
-        } else{
+        } else {
             AnimationController.SetInteger("AnimationState", (int) AnimatorState.Walking);
         }
     }
@@ -95,27 +89,28 @@ public class Animal : MonoBehaviour{
     }  
 
     private void OnTriggerEnter(Collider other){
+        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<Player>().isCrouching){
+            // Checks for player presence (i.e. not crouching)
+            Debug.Log("Flee");
+            Flee(other.gameObject.transform.position);
+            return;
+        }
+
         if(other.gameObject.tag == FoodPreference){
             // Checks for food preference
-            Debug.Log(other.gameObject.transform.position);
             Agent.SetDestination(other.gameObject.transform.position);
             IsWalkingToFood=true;
             CurrFood = other.gameObject;
-        } else if (other.gameObject.tag == "Player" && other.gameObject.GetComponent<Player>().isCrouching == true){
-            // Checks for player presence (i.e. not crouching)
-            Flee(other.gameObject.transform.position);
+            return;
         }
     }
 
     IEnumerator arrivalDelay(){
-        Debug.Log("coroutine arrival delay");
         yield return new WaitForSeconds(0.05f);
-        Debug.Log("delay over");
         ArrivalTime = -1f; 
     }
 
     IEnumerator Eating(GameObject food){
-        Debug.Log("coroutine eating food" );
         AnimationController.SetInteger("AnimationState", (int) AnimatorState.Eating);
         yield return new WaitForSeconds(2f);
         Destroy(food);
@@ -138,7 +133,6 @@ public class Animal : MonoBehaviour{
             //adds that animals sprite to the game object
             footprint.AddComponent<SpriteRenderer>();
             footprint.GetComponent<SpriteRenderer>().sprite=footprintSprite;
-            //Debug.Log("footprint placed");
             StartCoroutine("DestroyFootprint",footprint);
             distanceSinceLastFootprint = 0f;
         }
@@ -146,7 +140,6 @@ public class Animal : MonoBehaviour{
 
     IEnumerator DestroyFootprint( GameObject footprint){
         yield return new WaitForSeconds(15f);
-        Debug.Log("delay over");
         Color startAlpha = footprint.GetComponent<SpriteRenderer>().color;
         Color endAlpha = footprint.GetComponent<SpriteRenderer>().color;
         endAlpha.a=0f;
@@ -162,11 +155,12 @@ public class Animal : MonoBehaviour{
     }
 
 
-    public void Flee(Vector3 CurrPlayerPosition){
+    public void Flee(Vector3 PlayerPosition){
         // TODO: add option to make animals flee further away
         // TODO: check edge of map
         Agent.speed = 2*Agent.speed;
         AnimationController.SetInteger("AnimationState", (int) AnimatorState.Running);
-        Vector3 fleeDirection = (CurrPlayerPosition - Agent.transform.position).normalized;
+        Vector3 fleeDirection = (Agent.transform.position - PlayerPosition);
+        Agent.SetDestination(Agent.transform.position + fleeDirection);
     }
 }
