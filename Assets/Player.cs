@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
     public bool isPressingTab;
     public bool isTakingPicture;
     public CharacterController characterController;
-    public Transform CameraTransform;
+    public Camera PlayerCamera;
 
     private float walkingVelocity = 5;
     float velocity;
@@ -17,9 +18,10 @@ public class Player : MonoBehaviour
     private float sensitivity = 400;
     private float xRotation, yRotation;
 
-    // I think in order to keep reference to this i have to declare it from Unity
     public GameObject Scrapbook;
 
+
+    private string[] animalNames = {"Deer", "Boar", "Bear"};
 
     void Start(){
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
         isCrouching = Input.GetKey("left ctrl");
         isTakingPicture= Input.GetKey("mouse 1");
         //tab_pressed = Input.GetKey("tab");
+        TakePicture();
         MoveCamera();
         MovePlayer();
 
@@ -42,9 +45,9 @@ public class Player : MonoBehaviour
     void MoveCamera(){
         // Camera Position
         if (isCrouching){
-            CameraTransform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+            PlayerCamera.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         } else {
-            CameraTransform.position = new Vector3(transform.position.x, 1, transform.position.z);
+            PlayerCamera.transform.position = new Vector3(transform.position.x, 1, transform.position.z);
         }
 
         // Camera Rotation
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour
         xRotation -= Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivity;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        CameraTransform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        PlayerCamera.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
     }
 
     void MovePlayer(){
@@ -63,5 +66,22 @@ public class Player : MonoBehaviour
         Vector3 motion = transform.forward * VerticalInput + transform.right * HorizontalInput;
         velocity = isCrouching ? walkingVelocity/2 : walkingVelocity;
         characterController.Move(motion.normalized * velocity * Time.deltaTime);
+    }
+
+    string TakePicture(){
+       if(Input.GetMouseButtonDown(0)){
+            Ray CameraRay = PlayerCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit CameraHit;
+            
+            if (Physics.Raycast(CameraRay, out CameraHit)){
+                int AnimalIdx = Array.IndexOf(animalNames, CameraHit.collider.tag);
+                if (AnimalIdx != -1){
+                    Scrapbook.GetComponent<Scrapbook>().MarkAnimalFound(AnimalIdx); 
+                    Debug.Log("TAG: " + CameraHit.collider.tag);
+                    return animalNames[AnimalIdx];
+                }
+            }
+       }
+       return null;
     }
 }
