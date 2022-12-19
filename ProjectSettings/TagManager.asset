@@ -9,6 +9,9 @@ TagManager:
   - Scrapbook
   - Terrain
   - BoarFood
+  - Bear
+  - Deer
+  - Boar
   layers:
   - Default
   - TransparentFX
