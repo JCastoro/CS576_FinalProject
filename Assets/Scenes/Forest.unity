@@ -886,22 +886,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Find as many target animals before time runs out
+  m_text: 'Find as many target animals before time runs out. You will need to find
+    a deer first, then a boar, and finally a bear.
 
 
-    Animals leave behind
-    footprints for you to track
+    Animals leave behind footprints
+    for you to track
 
 
-    When close, pull out your camera to take a
-    picture
+    When close, pull out your camera to take a picture
 
 
-    Make sure to crouch when walking near animals or else they might
-    flee
+    Make
+    sure to crouch when walking near animals or else they might flee
 
 
-    Take as many pictures of animals as possible before time runs out'
+    Take as
+    many pictures of animals as possible before time runs out'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
