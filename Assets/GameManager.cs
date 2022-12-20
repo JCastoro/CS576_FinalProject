@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update(){
         CheckifDisplayScrapbook();
+        updateTime(TimeRemainingText,ref TimeRemaining);
         //to be called when player captures the animal picture.
         //NextAnimalObjective(ref currAnimalIndex);
 
@@ -97,13 +98,13 @@ public class GameManager : MonoBehaviour
         }
        
     }
-    void SetHUDbyAnimalIndex(int currAnimalIndex){
+    public void SetHUDbyAnimalIndex(int currAnimalIndex){
         objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
         objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
     }
 
     public void updateTime(Text timeRemainingText, ref float timeRemaining){
-        if(timeRemaining>0){
+        if(timeRemaining>0f){
             timeRemaining-=Time.deltaTime;
             float minutes = Mathf.FloorToInt(timeRemaining / 60);
             float seconds = Mathf.FloorToInt(timeRemaining % 60);

@@ -8154,6 +8154,7 @@ MonoBehaviour:
   characterController: {fileID: 2103683948}
   PlayerCamera: {fileID: 153782969}
   Scrapbook: {fileID: 625622534}
+  GameManager: {fileID: 1505536884}
 --- !u!136 &2103683944
 CapsuleCollider:
   m_ObjectHideFlags: 0

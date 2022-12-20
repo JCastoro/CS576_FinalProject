@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float xRotation, yRotation;
 
     public GameObject Scrapbook;
+    public GameObject GameManager;
 
 
     private string[] animalNames = {"Deer", "Boar", "Bear"};
@@ -76,7 +77,8 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(CameraRay, out CameraHit)){
                 int AnimalIdx = Array.IndexOf(animalNames, CameraHit.collider.tag);
                 if (AnimalIdx != -1){
-                    Scrapbook.GetComponent<Scrapbook>().MarkAnimalFound(AnimalIdx); 
+                    Scrapbook.GetComponent<Scrapbook>().MarkAnimalFound(AnimalIdx);
+                    GameManager.GetComponent<GameManager>().SetHUDbyAnimalIndex(AnimalIdx+1);
                     Debug.Log("TAG: " + CameraHit.collider.tag);
                     return animalNames[AnimalIdx];
                 }
