@@ -2088,6 +2088,9 @@ MonoBehaviour:
   BearFood: {fileID: 1852749347}
   BoarFood: {fileID: 675731832}
   DeerFood: {fileID: 2145927194}
+  Bear: {fileID: 1547238471}
+  Boar: {fileID: 845554347}
+  Deer: {fileID: 1513081557}
 --- !u!1 &452274672 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000011143488790, guid: a649302f8407dd9469e2c5b67b4a0674, type: 3}
@@ -4612,7 +4615,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83373964, y: 0.7396137}
   m_AnchorMax: {x: 0.9947917, y: 0.9905909}
-  m_AnchoredPosition: {x: 1.3051758, y: 5.7979736}
+  m_AnchoredPosition: {x: 1.3051758, y: 5.7978516}
   m_SizeDelta: {x: -8.343994, y: -8.987061}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093464256
@@ -8128,7 +8131,7 @@ GameObject:
   - component: {fileID: 2103683948}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
