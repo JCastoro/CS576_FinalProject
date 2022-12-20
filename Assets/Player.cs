@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public bool isTakingPicture;
     public CharacterController characterController;
     public Camera PlayerCamera;
+    public AudioClip CameraClip;
+    private AudioSource Source;
 
     private float walkingVelocity = 5;
     float velocity;
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
     private string[] animalNames = {"Deer", "Boar", "Bear"};
 
     void Start(){
+        Source = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -70,7 +73,8 @@ public class Player : MonoBehaviour
     }
 
     string TakePicture(){
-       if(Input.GetMouseButtonDown(0)){
+       if(isTakingPicture && Input.GetMouseButtonDown(0)){
+            Source.PlayOneShot(CameraClip);
             Ray CameraRay = PlayerCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit CameraHit;
             
