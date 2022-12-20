@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void CheckifDisplayScrapbook(){
          
-        Debug.Log(ScrapbookOverlay);
+        // Debug.Log(ScrapbookOverlay);
         if(Player.isPressingTab){
             ScrapbookOverlay.SetActive(true);
         }

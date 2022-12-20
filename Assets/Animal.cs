@@ -55,8 +55,8 @@ public class Animal : MonoBehaviour{
     protected virtual void Update(){
         if(Time.time < 1f)
             return;
-        leaveFootprints(footprint);
 
+        leaveFootprints(footprint);
         if(Agent.remainingDistance <= Agent.stoppingDistance){//if at our currentDestination
             //flag to see if we have first arrived somewhere
             if (ArrivalTime == -1f){
@@ -72,8 +72,6 @@ public class Animal : MonoBehaviour{
                     StartCoroutine("Eating", CurrFood);
                 }
             }
-        } else {
-            AnimationController.SetInteger("AnimationState", (int) AnimatorState.Walking);
         }
     }
 
@@ -89,13 +87,6 @@ public class Animal : MonoBehaviour{
     }  
 
     private void OnTriggerEnter(Collider other){
-        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<Player>().isCrouching){
-            // Checks for player presence (i.e. not crouching)
-            Debug.Log("Flee");
-            Flee(other.gameObject.transform.position);
-            return;
-        }
-
         if(other.gameObject.tag == FoodPreference){
             // Checks for food preference
             Agent.SetDestination(other.gameObject.transform.position);
@@ -105,7 +96,24 @@ public class Animal : MonoBehaviour{
         }
     }
 
+    private void OnTriggerStay(Collider other){
+        if (other.gameObject.tag == "Player" && !other.gameObject.GetComponent<Player>().isCrouching){
+            // Checks for player presence (i.e. not crouching)
+            Flee(other.gameObject.transform.position);
+            return;
+        }
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.gameObject.tag == "Player"){
+            Agent.speed = speed / 2;
+            AnimationController.SetInteger("AnimationState", (int) AnimatorState.Walking);
+            return;
+        }
+    }
+
     IEnumerator arrivalDelay(){
+        Agent.speed = Agent.speed;
         yield return new WaitForSeconds(0.05f);
         ArrivalTime = -1f; 
     }
@@ -156,9 +164,7 @@ public class Animal : MonoBehaviour{
 
 
     public void Flee(Vector3 PlayerPosition){
-        // TODO: add option to make animals flee further away
-        // TODO: check edge of map
-        Agent.speed = 2*Agent.speed;
+        Agent.speed = speed * 10;
         AnimationController.SetInteger("AnimationState", (int) AnimatorState.Running);
         Vector3 fleeDirection = (Agent.transform.position - PlayerPosition);
         Agent.SetDestination(Agent.transform.position + fleeDirection);
