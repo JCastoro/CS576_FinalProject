@@ -86,15 +86,15 @@ public class GameManager : MonoBehaviour
     }
 
 //moves us to the next objective
-    void NextAnimalObjective(ref int currAnimalIndex){
-        if(currAnimalIndex<AnimalsToFind.Count){
+    void NextAnimalObjective(){
+        if(currAnimalIndex<AnimalsToFind.Count-1){
+            objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex+1];
+            objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex+1]; 
+            ScrapbookOverlay.GetComponent<Scrapbook>().MarkAnimalFound(currAnimalIndex);
             currAnimalIndex+=1;
-            objectiveName.GetComponent<Text>().text=AnimalsToFind[currAnimalIndex];
-            objectiveImage.GetComponent<Image>().sprite = spriteArray[currAnimalIndex]; 
-            ScrapbookOverlay.GetComponent<Scrapbook>().MarkAnimalFound(currAnimalIndex-1);
         }
         else{
-            Debug.Log("Called next animal object when list was complete.");
+            Debug.Log("Called next animal object when list was complete.GAMEOVER");
         }
        
     }
@@ -113,6 +113,15 @@ public class GameManager : MonoBehaviour
         else{
             SceneManager.LoadScene("GameOver");
             //change scenes to game over.
+        }
+    }
+
+    public void CheckIfUpdateHUDandSB(int AnimalIndexPassed){
+        if(AnimalIndexPassed == currAnimalIndex){
+            NextAnimalObjective();
+        }
+        else{
+            return;
         }
 
 

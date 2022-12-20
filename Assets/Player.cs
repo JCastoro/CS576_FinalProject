@@ -77,8 +77,9 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(CameraRay, out CameraHit)){
                 int AnimalIdx = Array.IndexOf(animalNames, CameraHit.collider.tag);
                 if (AnimalIdx != -1){
-                    Scrapbook.GetComponent<Scrapbook>().MarkAnimalFound(AnimalIdx);
-                    GameManager.GetComponent<GameManager>().SetHUDbyAnimalIndex(AnimalIdx+1);
+                    GameManager.GetComponent<GameManager>().CheckIfUpdateHUDandSB(AnimalIdx);
+                    // Scrapbook.GetComponent<Scrapbook>().MarkAnimalFound(AnimalIdx);
+                    // GameManager.GetComponent<GameManager>().SetHUDbyAnimalIndex(AnimalIdx+1);
                     Debug.Log("TAG: " + CameraHit.collider.tag);
                     return animalNames[AnimalIdx];
                 }
